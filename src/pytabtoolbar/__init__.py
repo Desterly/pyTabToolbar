@@ -3,6 +3,10 @@ from .page import Page
 from .subgroup import ActionParams, Align, SubGroup
 from .tabtoolbar import TabToolbar
 from .style import (
+    STYLE_COOL,
+    STYLE_THRESHOLD,
+    STYLE_VIENNA,
+    STYLE_WHITEMERCY,
     StyleParams,
     get_stylesheet,
     get_styles,
@@ -12,6 +16,10 @@ from .style import (
 from ._builder import Builder
 
 __all__ = [
+    "STYLE_COOL",
+    "STYLE_THRESHOLD",
+    "STYLE_VIENNA",
+    "STYLE_WHITEMERCY",
     "ActionParams",
     "Align",
     "TabToolbar",
