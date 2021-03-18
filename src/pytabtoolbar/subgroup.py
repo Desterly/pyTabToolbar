@@ -67,13 +67,12 @@ class SubGroup(QFrame):
         frame.setFrameShape(QFrame.NoFrame)
         frame.setLineWidth(0)
         frame.setContentsMargins(0, 0, 0, 0)
-        policy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        policy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
         policy.setHorizontalStretch(0)
         policy.setVerticalStretch(1)
         frame.setSizePolicy(policy)
         frame.setMaximumHeight(group_maxheight / rowcount)
         llayout = QHBoxLayout(frame)
-        # layout.setMargin(0)
         llayout.setContentsMargins(0, 0, 0, 0)
         llayout.setSpacing(spacing)
         llayout.setDirection(QBoxLayout.LeftToRight)
@@ -99,7 +98,7 @@ class SubGroup(QFrame):
         btn.setIconSize(QtCore.QSize(iconsize, iconsize))
         if menu:
             btn.setMenu(menu)
-        btn.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        btn.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
         frame.layout().addWidget(btn)
         self.innerLayout.insertWidget(self.innerLayout.count() - 1, frame)
 
