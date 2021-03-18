@@ -10,11 +10,12 @@ from .tabtoolbar import TabToolbar
 
 
 class Builder(QtCore.QObject):
-    def __init__(self, parent: QWidget):
+    def __init__(self, parent: QWidget, defaultstyle: str = None):
         super(Builder, self).__init__(parent)
         self.parent: QWidget = parent
         self.guiWidgets: Dict[str, QWidget] = {}
         self.customWidgetCreators: Dict[str, QWidget] = {}
+        self.defaultstyle = defaultstyle
 
     def __getitem__(self, widget_name):
         if len(self.guiWidgets) > 0:
@@ -28,7 +29,7 @@ class Builder(QtCore.QObject):
         if json and key in json:
             return json[key]
         else:
-            if default:
+            if default is not None:
                 return default
         raise Exception("JSON Key not found and no default specified")
 
@@ -59,7 +60,7 @@ class Builder(QtCore.QObject):
         group_height: int = self.read_json(config, "groupHeight")
         group_rowcount: int = self.read_json(config, "groupRowCount")
         has_specialtab: bool = self.read_json(config, "specialTab")
-        tt = TabToolbar(self.parent, group_height, group_rowcount)
+        tt = TabToolbar(self.parent, self.defaultstyle, group_height, group_rowcount)
         corner_actions: List = self.read_json(config, "cornerActions", {})
         for corner_action in corner_actions:
             tt.add_corneraction(self.actionsMap[corner_action])

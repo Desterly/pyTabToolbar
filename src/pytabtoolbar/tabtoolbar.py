@@ -32,7 +32,11 @@ class TabToolbar(QToolBar):
     StyleChanged = QtCore.pyqtSignal()
 
     def __init__(
-        self, parent: QWidget = None, group_maxheight: int = 75, group_rowcount: int = 3
+        self,
+        parent: QWidget = None,
+        defaultstyle: str = None,
+        group_maxheight: int = 75,
+        group_rowcount: int = 3,
     ):
         super(TabToolbar, self).__init__(parent)
         style.register_default_styles()
@@ -93,7 +97,9 @@ class TabToolbar(QToolBar):
         self.tabBar.currentChanged.connect(self.focus_changed)
         self.cornerLayout.addWidget(self.hideButton)
         self.tabBar.setCornerWidget(self.cornerActions)
-        self.set_style(style.get_defaultstyle())
+        if not defaultstyle:
+            defaultstyle = style.get_defaultstyle()
+        self.set_style(defaultstyle)
 
     def _hideaction(self):
         # self.tempShowTimer.start()
@@ -106,6 +112,7 @@ class TabToolbar(QToolBar):
             self.Maximized.emit()
 
     def event(self, event: QtCore.QEvent):
+
         if event.type() == QtCore.QEvent.StyleChange and not self.ignore_styleevent:
             # TODO: Validatre if we need a timer
             stylename = (
@@ -136,6 +143,7 @@ class TabToolbar(QToolBar):
         stylesheet = style.get_stylesheet(self._style)
         self.setStyleSheet(stylesheet)
         self.ignore_styleevent = False
+
         self.StyleChanged.emit()
 
     def get_style(self) -> str:
