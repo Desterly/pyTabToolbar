@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+import math
 
 from typing import List, Union
 
@@ -71,7 +72,7 @@ class SubGroup(QFrame):
         policy.setHorizontalStretch(0)
         policy.setVerticalStretch(1)
         frame.setSizePolicy(policy)
-        frame.setMaximumHeight(group_maxheight / rowcount)
+        frame.setMaximumHeight(math.ceil(group_maxheight / rowcount))
         llayout = QHBoxLayout(frame)
         llayout.setContentsMargins(0, 0, 0, 0)
         llayout.setSpacing(spacing)
