@@ -113,7 +113,7 @@ class Group(QFrame):
             btn.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
             btn.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
             btn.setPopupMode(type)
-            btn.setStyle(style.TTToolButtonStyle())
+            btn.setStyle(style.TTToolButtonStyle(self.inner_layout))
             if menu:
                 btn.setMenu(menu)
             self.inner_layout.addWidget(btn)

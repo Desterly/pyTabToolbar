@@ -30,7 +30,7 @@ class _CompactToolButton(QFrame):
         self.upButton.setDefaultAction(action)
         self.upButton.setIconSize(QtCore.QSize(iconsize, iconsize))
         self.upButton.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
-        self.upButton.setStyle(TTToolButtonStyle())
+        self.upButton.setStyle(TTToolButtonStyle(self))
         self.upButton.setMaximumHeight(iconsize + 5)
 
         self.vlayout = QVBoxLayout(self)
@@ -49,9 +49,10 @@ class _CompactToolButton(QFrame):
         self.downButton.setPopupMode(QToolButton.InstantPopup)
         self.downButton.setMinimumHeight(25)
         self.downButton.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Minimum)
-        self.downButton.setText(action.text())
-        self.downButton.setToolTip(action.toolTip())
-        self.downButton.setStyle(TTToolButtonStyle())
+        if action:
+            self.downButton.setText(action.text())
+            self.downButton.setToolTip(action.toolTip())
+        self.downButton.setStyle(TTToolButtonStyle(self))
 
         if menu:
             self.downButton.setMenu(menu)

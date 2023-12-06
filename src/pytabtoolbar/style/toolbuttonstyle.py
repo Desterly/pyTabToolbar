@@ -14,9 +14,10 @@ from PyQt5.QtWidgets import (
 
 
 class TTToolButtonStyle(QProxyStyle):
-    def __init__(self, base_style: Optional[QProxyStyle] = None, *args):
+    def __init__(self, parent, base_style: Optional[QProxyStyle] = None, *args):
         super().__init__(*args)
         self._base_style = base_style or super()
+        self.setParent(parent)
 
     def drawControl(
         self,
